@@ -9,3 +9,17 @@
 	margin: auto;
 	position: relative;
 }
+.main-con input[type=text]{
+	position: absolute;
+	left: 480px;
+	bottom:175px;
+	height: 50px;
+	width: 230px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	color: white;
+	text-align: center;
+	font-family:'game';
+	font-size: 20px;
+}
