@@ -1,0 +1,26 @@
+body{
+	 background-image:url(../img/bg3.JPG) ;
+	 }
+.photo {
+	margin: 10px;padding: 10px;float: left;background: white;box-shadow: 5px 5px 5px black;
+	border-radius: 7px;transition:transform 0.2s linear;position: relative;overflow: hidden;
+}
+.photo:nth-child(2n - 1){
+	transform:rotate(5deg) ;
+}
+.photo:nth-child(2n){
+	transform:rotate(-5deg) ;
+}
+.photo:hover{
+	transform: scale(1.2);
+}
+.photo:hover p{
+	bottom: 0px;
+}
+.photo img{
+	height: 150px;display: block;
+}
+.photo p{
+	text-align: center;font-size:10px;font-family: "微软雅黑";width: 100%;position: absolute;margin: 0px;
+	height: 30px;bottom: -30px;left: 0px;transition: all 0.2s linear;background: rgba(0,0,0,0.4);color: white;letter-spacing: 4px;
+}
