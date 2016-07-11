@@ -1,0 +1,11 @@
+@font-face {
+	font-family:'game';
+	src: url(汉仪雪君体简.ttf);
+}
+.main-con{
+	background-image: url(../img/main-bg.jpg);
+	width: 1200px;
+	height: 600px;
+	margin: auto;
+	position: relative;
+}
