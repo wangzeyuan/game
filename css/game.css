@@ -111,7 +111,6 @@ body,html{
 	text-align: center;
 }
 .chat{
-	border: 1px solid red;
 	position: absolute;
 	width: 680px;
 	height: 260px;
@@ -132,7 +131,38 @@ body,html{
 	margin: 20px;
 	line-height: 10px;
 }
-
+.chat .footer input[type=text]{
+	position: absolute;
+	border-radius:5px;
+	left: 200px;
+	bottom:15px;
+	height: 25px;
+	width: 200px;
+	background-color: transparent;
+	border: 2px solid black;
+	outline: none;
+	color: black;
+	text-align: center;
+	font-family:'game';
+	font-size: 20px;
+}
+.chat .footer button{
+	position: absolute;
+	border-radius:5px;
+	left: 420px;
+	bottom:18px;
+	height: 25px;
+	width: 70px;
+	background-color: transparent;
+	outline: none;
+	color: black;
+	text-align: center;
+	font-family:'game';
+	font-size: 20px;
+}
+.chat .footer button:hover{
+	color: black;
+}
 .main-con input[type=text]{
 	position: absolute;
 	left: 53px;
