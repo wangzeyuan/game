@@ -19,6 +19,18 @@
 				}else if(food=="鸡蛋"){
 					mone=2*num;
 				}
+				
+				money=money.toFixed(2);
+				var arr = money.split(".");
+				money = "";
+				var temp =arr[0];
+				var index =Math.ceil(temp.length/3)-1;
+				for(var i =0;i<index;i++){
+					money=","+temp.slice(temp.length - 3)+money;
+					temp=temp.slice(0,temp.length - 3);
+				}
+				money=temp + money +"."+arr[1];
+				
 				alert("需要支付"+money+"元“")
 				}
 			}
