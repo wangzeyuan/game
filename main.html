@@ -105,13 +105,13 @@
 		
 		function getStatus( line ){
 			if (line == 1){
-				return "在线";
+				return "<td class='green'>在线</td>";
 			}else if(line == 2){
-				return "准备中";
+				return "<td class='blue'>准备中</td>";
 			}else if(line == 3){
-				return "游戏中";
+				return "<td class='yellow'>游戏中</td>";
 			}else if(line == 4){
-				return "离线";
+				return "<td class='red'>离线</td>";
 			}
 		}
 	</script>

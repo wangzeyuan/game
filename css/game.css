@@ -195,3 +195,15 @@ body,html{
 	color: gray;
 	transition:all 0.5s linear;
 }
+.red{
+	color: red;
+}
+.blue{
+	color: blue;
+}
+.green{
+	color: green;
+}
+.yellow{
+	color: yellow;
+}
