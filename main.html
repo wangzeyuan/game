@@ -4,16 +4,14 @@
 		<meta charset="UTF-8">
 		<title>游戏大厅</title>
 		<link rel="stylesheet" type="text/css" href="css/game.css"/>
+		<script src="js/player.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="main-con">
 			<div class="userinfo">
-				<h1>迷惘小生</h1>
-				<p>ID:123456789</p>
-				<p>
-					胜场：1
-				              胜率：100%
-				</p>
+				<h1></h1>
+				<p></p>
+				<p></p>
 			</div>
 			<div class="online">
 				<div class="online-top">
@@ -22,33 +20,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="online-bottom">
-					<table>
-						<tr>
-                        	<td>玩家一</td>
-							<td>ID:123456789</td>
-							<td>在线</td>
-						</tr>
-						<tr>
-                        	<td>玩家一</td>
-							<td>ID:123456789</td>
-							<td>在线</td>
-						</tr>
-						<tr>
-                        	<td>玩家一</td>
-							<td>ID:123456789</td>
-							<td>在线</td>
-						</tr>
-						<tr>
-                        	<td>玩家一</td>
-							<td>ID:123456789</td>
-							<td>在线</td>
-						</tr>
-						<tr>
-                        	<td>玩家一</td>
-							<td>ID:123456789</td>
-							<td>在线</td>
-						</tr>
-					</table>
+					<table></table>
 				</div>
 			</div>
 			<div class="room">
@@ -129,7 +101,41 @@
 			var user = localStorage.getItem("user");
 			if(!user){
 				window.location.href="login.html";
+			}else{
+				user = JSON.parse(user)
 			}
-		})
+			initUser(user);
+			initOnline( users );
+		});
+		
+		function initUser( user ){
+			$(".userinfo h1").html(user.username).next().html("ID:" + user.id)
+			                 .next().html("胜场：" + user.win +"胜率：" + (user.total ? user.win/user.total : 0) + "%");
+		}
+		
+		function initOnline( users ){
+			var html ="";
+			for( var i = 0;i < users.length;i++){
+				var temp =users[i];
+				html += '<tr>';
+	            html += '<td>' + temp.username +'</td>';
+				html += '<td>' + temp.id + '</td>';
+				html += '<td>' + getStatus(temp.line) + '</td>';
+				html += '</tr>';
+			}
+			$(".online table").html(html);
+		}
+		
+		function getStatus( line ){
+			if (line == 1){
+				return "在线";
+			}else if(line == 2){
+				return "准备中";
+			}else if(line == 3){
+				return "游戏中";
+			}else if(line == 4){
+				return "离线";
+			}
+		}
 	</script>
 </html>
