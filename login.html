@@ -6,12 +6,30 @@
 		<link rel="stylesheet" type="text/css" href="css/game.css"/>
 	</head>
 	<body>
-			<input type="text" name="" id="" placeholder="请输入昵称" />
-			<button onclick="goMain()">进入游戏</button>
+			<div class="login-con"> 
+			<input type="text" name="" id="username" placeholder="请输入昵称" />
+			<button id="btn">进入游戏</button>
+			</div>
 	</body>
+	<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		function goMain(){
-			window.location.href="main.html";
-		}
+		$(function(){
+			var user = localStorage.getItem("user");
+			if(user){
+				window.location.href="main.html";
+			}
+			$("#btn").click(function(){
+				var username = $("#username").val();
+				var user ={
+					name:username,
+					id:null,
+					total:0,
+					win:0,
+					line:0
+				}
+				localStorage.setItem("user",JSON.stringify(user));
+				window.location.href="main.html";
+			})
+		})
 	</script>
 </html>

@@ -123,4 +123,13 @@
 		    <button onclick="goMain()">进入</button>
 		</div>
 	</body>
+	<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var user = localStorage.getItem("user");
+			if(!user){
+				window.location.href="login.html";
+			}
+		})
+	</script>
 </html>
