@@ -90,14 +90,14 @@ body,html{
 .online-bottom table tr{
 	height: 30px;
 }
-.room{
+.rooms{
 	position: absolute;
 	width: 680px;
 	height: 170px;
 	top: 50px;
 	right: 70px;
 }
-.room h2{
+.rooms h2{
 	margin: 0px;
 	text-align: center;
 }

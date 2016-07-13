@@ -48,3 +48,18 @@ var users = [{
 		line:2
 	}
 ]
+var rooms = [
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'},
+    {roomname:'输光光'}
+]

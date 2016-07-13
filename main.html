@@ -23,58 +23,9 @@
 					<table></table>
 				</div>
 			</div>
-			<div class="room">
+			<div class="rooms">
 					<h2>房间</h2>
-					<div class="roombottom">
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-						<div class="fangjian">
-							<img src="img/room.png"/>
-							<p>输光光</p>
-						</div>
-					</div>
+					<div class="roombottom"></div>
 			</div>
 			<div class="chat">
 				<h2>聊天信息</h2>
@@ -106,6 +57,7 @@
 			}
 			initUser(user);
 			initOnline( users );
+			initRooms( rooms );
 		});
 		
 		function initUser( user ){
@@ -124,6 +76,18 @@
 				html += '</tr>';
 			}
 			$(".online table").html(html);
+		}
+		
+		function initRooms(rooms){
+			var html ="";
+			for( var i = 0;i < rooms.length;i++){
+				var temp = rooms[i];
+				html += '<div class="fangjian">';
+				html += '<img src="img/room.png"/>';
+				html += '<p>输光光</p>';
+				html += '</div>';
+			}
+			$(".rooms .roombottom").html(html);
 		}
 		
 		function getStatus( line ){
