@@ -30,19 +30,14 @@
 			<div class="chat">
 				<h2>聊天信息</h2>
 				<div class="body">
-						<ul>
-							<li>玩家一：这个游戏怎么玩？</li>
-							<li>玩家一：这个游戏怎么玩？</li>
-							<li>玩家一：这个游戏怎么玩？</li>
-							<li style="text-align: right;">玩家二：这个游戏很容易!</li>
-						</ul>
+						<ul></ul>
 				</div>
 				<div class="footer">
-					<input type="text" name="" id="" />
-					<button onclick="goMain()">发送</button>
+					<input type="text" name="" id="chatmsg" />
+					<button id="sendchat">发送</button>
 				</div>
 			</div>
-			<input type="text" name="" id="" placeholder="请输入房间号" />
+			<input type="text" name="" id="roomname" placeholder="请输入房间号" />
 		    <button onclick="goMain()">进入</button>
 		</div>
 	</body>
@@ -55,6 +50,16 @@
 			}else{
 				user = JSON.parse(user)
 			}
+			
+			$("#sendchat").click(function(){
+				var chat = {
+					username:user.username,
+					msg:$("#chatmsg").val(),
+				}
+				
+				showchat( chat,true );
+			});
+			
 			initUser(user);
 			initOnline( users );
 			initRooms( rooms );
@@ -88,6 +93,14 @@
 				html += '</div>';
 			}
 			$(".rooms .roombottom").html(html);
+		}
+		
+		function showchat( chat,isme ){
+			if(isme){
+				$(".chat .body ul").append("<li style='text-align: right;'>" + chat.msg + ":" + chat.username  + "</li>");
+			}else{
+				$(".chat .body ul").append("<li>" + chat.username + chat.msg + ":" + "</li>")
+			}
 		}
 		
 		function getStatus( line ){
