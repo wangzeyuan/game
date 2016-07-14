@@ -86,6 +86,12 @@
 			socket.on("room.createroomOK",function(room){
 				joinRoom(room,true);
 			});
+			socket.on("room.joinfailed",function(){
+				alert("房间已满！");
+			});
+			socket.on("room.joinOK",function(room){
+				joinRoom(room,false);
+			});
 			$("#sendchat").click(function(){
 				var chat = {
 					username:user.username,
@@ -121,19 +127,22 @@
 			var html ="";
 			for( var i = 0;i < rooms.length;i++){
 				var temp = rooms[i];
-				html += '<div class="fangjian">';
+				html += '<div class="fangjian" data-roomname=' + temp.roomname + '>';
 				html += '<img src="img/room.png"/>';
 				html += '<p>' + temp.roomname +'</p>';
 				html += '</div>';
 			}
 			$(".rooms .roombottom").html(html);
+			$(".rooms .roombottom div").click(function(){
+				socket.emit("room.join",$(this).data("roomname"));
+			});
 		}
 		
 		function joinRoom(room,iscreate){
 			var html = "";
-			html += "玩家一：" + room.play1.name + "&nbsp;胜场:" + room.play1.win + "<br>PK<br>";
+			html += "玩家一：" + room.play1.username + "&nbsp;胜场:" + room.play1.win + "<br>PK<br>";
 			if(room.play2){
-				html += "玩家二：" + room.play2.name + "&nbsp;胜场:" + room.play2.win;
+				html += "玩家二：" + room.play2.username + "&nbsp;胜场:" + room.play2.win;
 			}
 			
 			if(iscreate){
