@@ -186,7 +186,7 @@ body,html{
 	font-family:'game';
 	font-size: 20px;
 }
-.main-con button{
+#createroom{
 	position: absolute;
 	left: 205px;
 	bottom:38px;

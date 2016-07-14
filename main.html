@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<input type="text" name="" id="roomname" placeholder="请输入房间号" />
-		    <button>进入</button>
+		    <button id="createroom">进入</button>
 		</div>
 	</body>
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
@@ -71,15 +71,31 @@
 			socket.on("chat.newchat",function(chat){
 				showchat(chat,false);
 			});
+			socket.on("room.rooms",function( rooms ){
+				initRooms(rooms);
+			});
+			
+			$("#createroom").click(function(){
+				socket.emit("room.createroom",$("#roomname").val());
+				$("#roomname").val(' ');
+			});
+			
+			socket.on("room.exists",function(){
+				alert("房间存在，创建失败");
+			})
+			socket.on("room.createroomOK",function(room){
+				joinRoom(room,true);
+			});
 			$("#sendchat").click(function(){
 				var chat = {
 					username:user.username,
-					msg:$("#chatmsg").val(),
+					msg:$("#chatmsg").val()
 				}
 				$("#chatmsg").val("");
 				showchat( chat,true );
 				socket.emit("chat.send",chat);
 			});
+			
 			
 		});
 		
@@ -107,10 +123,25 @@
 				var temp = rooms[i];
 				html += '<div class="fangjian">';
 				html += '<img src="img/room.png"/>';
-				html += '<p>输光光</p>';
+				html += '<p>' + temp.roomname +'</p>';
 				html += '</div>';
 			}
 			$(".rooms .roombottom").html(html);
+		}
+		
+		function joinRoom(room,iscreate){
+			var html = "";
+			html += "玩家一：" + room.play1.name + "&nbsp;胜场:" + room.play1.win + "<br>PK<br>";
+			if(room.play2){
+				html += "玩家二：" + room.play2.name + "&nbsp;胜场:" + room.play2.win;
+			}
+			
+			if(iscreate){
+				html += "<button>开始游戏</button>";
+			}
+			html += "<button>退出游戏</button>";
+			
+			$(".rooms .roombottom").html(html)
 		}
 		
 		function showchat( chat,isme ){
