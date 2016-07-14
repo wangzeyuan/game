@@ -121,15 +121,24 @@ body,html{
 	text-align: center;
 	margin: 0px;
 }
+.chat{
+	overflow: hidden;
+}
+.chat .body{
+	height: 160px;
+	overflow-y:scroll ;
+}
 .chat .body ul{
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
 	margin-left: 10px;
+	
 }
 .chat .body ul li{
 	margin: 20px;
 	line-height: 10px;
+	
 }
 .chat .footer input[type=text]{
 	position: absolute;

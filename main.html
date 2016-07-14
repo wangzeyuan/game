@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<input type="text" name="" id="roomname" placeholder="请输入房间号" />
-		    <button ">进入</button>
+		    <button>进入</button>
 		</div>
 	</body>
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
@@ -63,21 +63,24 @@
 					socket.emit("user.online",user);
 					initUser(user);
 				});
-				
-				socket.on("user.online",function(users){
+		
+			socket.on("user.online",function(users){
 					initOnline( users );
 				})
 			
+			socket.on("chat.newchat",function(chat){
+				showchat(chat,false);
+			});
 			$("#sendchat").click(function(){
 				var chat = {
 					username:user.username,
 					msg:$("#chatmsg").val(),
 				}
-				
+				$("#chatmsg").val("");
 				showchat( chat,true );
+				socket.emit("chat.send",chat);
 			});
 			
-
 		});
 		
 		function initUser( user ){
@@ -114,7 +117,7 @@
 			if(isme){
 				$(".chat .body ul").append("<li style='text-align: right;'>" + chat.msg + ":" + chat.username  + "</li>");
 			}else{
-				$(".chat .body ul").append("<li>" + chat.username + chat.msg + ":" + "</li>")
+				$(".chat .body ul").append("<li>"  + chat.username +":" + chat.msg  + "</li>")
 			}
 		}
 		
