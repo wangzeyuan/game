@@ -14,9 +14,13 @@
 				socket.on('connect',function(){
 					console.log("连接成功");
 				});
-				socket.on('event', function(data){});
+
                 socket.on('disconnect', function(){
                 console.log("断开连接");
+			});
+			
+			socket.on('messageresponse', function(data){
+				console.log(data);
 			});
 			
 			$('.on').click(function(){
@@ -24,8 +28,11 @@
 			})
 			$('.off').click(function(){
 				socket.close()
-			})
-			})
+			});
+			$('.send').click(function(){
+				socket.emit("messagerequest","发送到服务器的消息");
+			});
+			});
 				
 			
 		</script>
@@ -33,5 +40,6 @@
 	<body>
 		<button class="on">连接</button>
 		<button class="off">断开</button>
+		<button class="send">发送消息</button>
 	</body>
 </html>
