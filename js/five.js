@@ -69,10 +69,9 @@ function gameInit( id ){
 			pen.arc(col * 40 + 20,row * 40 + 20,15,0,2 * Math.PI);
 			pen.fill();
 			pen.closePath();
+			gameOver(row,col,flag);
+			flag = flag ==1?2:1;
 		}
-		
-		gameOver(row,col,flag);
-		flag = flag ==1?2:1;
 	});
 }
 
