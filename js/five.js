@@ -1,6 +1,7 @@
 var pen = null;
 var offset = null;
-var flag = true;
+var flag = 1;
+var data = [];
 
 function gameInit( id ){
 	var html = '<canvas id = "five" width = "600px" height="600px"></canvas>';
@@ -38,6 +39,14 @@ function gameInit( id ){
 		pen.closePath();
 	}
 	
+	for( var i = 0;i<15;i++){
+		var temp = [];
+		for( var j = 0;j<15;j++){
+			temp.push(-1);
+		}
+		data.push(temp);
+	}
+	
 	offset=$("#five").offset();
 	
 	$("#five").mousedown(function(event){
@@ -47,19 +56,109 @@ function gameInit( id ){
 		var row = Math.floor(y/40);
 		var col = Math.floor(x/40);
 		
-		pen.beginPath();
-		if(flag){
-			pen.fillStyle = "white";
-		}else{
-			pen.fillStyle = "black";
+		if(data[row][col] == -1){
+			data[row][col] = flag;
+			pen.beginPath();
+			if(flag == 1){
+				pen.fillStyle = "white";
+			}else{
+				pen.fillStyle = "black";
+			}
+			pen.arc(col * 40 + 20,row * 40 + 20,15,0,2 * Math.PI);
+			pen.fill();
+			pen.closePath();
 		}
-		flag = !flag;
-		pen.arc(col * 40 + 20,row * 40 + 20,15,0,2 * Math.PI);
-		pen.fill();
-		pen.closePath();	
+		
+		gameOver(row,col,flag);
+		flag = flag ==1?2:1;
 	});
 }
 
+function gameOver(row,col,flag){
+	//上下找
+	var count = 1;
+	for(var i= row-1;i>=0;i--){
+		if(data[i][col]==flag){
+			count ++;
+		}else{
+			break;
+		}
+	}
+	for(var i=row + 1;i<=15;i++){
+		if(data[i][col]==flag){
+			count++;
+		}else{
+			break;
+		}
+	}
+	if(count>=5){
+		alert("游戏结束");
+		return;
+	}
+	
+	//左右找
+	count = 1;
+	for(var i= col-1;i>=0;i--){
+		if(data[row][i]==flag){
+			count ++;
+		}else{
+			break;
+		}
+	}
+	for(var i=col + 1;i<=15;i++){
+		if(data[row][i]==flag){
+			count++;
+		}else{
+			break;
+		}
+	}
+	if(count>=5){
+		alert("游戏结束");
+		return;
+	}
+	
+	//左上右下
+	count = 1;
+	for(var i= row-1,j=col-1;i>=0,j>=0;i--,j--){
+		if(data[i][j]==flag){
+			count++;
+		}else{
+			break;
+		}
+	}
+	for(var i=row+1,j=col+1;i<15,j<15;i++,j++){
+		if(data[i][j]==flag){
+			count++;
+		}else{
+			break;
+		}
+	}
+	if(count>=5){
+		alert("游戏结束");
+		return;
+	}
+	
+	//右上左下
+	count = 1;
+	for(var i= row-1,j=col+1;i>=0,j<15;i--,j++){
+		if(data[i][j]==flag){
+			count++;
+		}else{
+			break;
+		}
+	}
+	for(var i=row+1,j=col-1;i<15,j>=0;i++,j--){
+		if(data[i][j]==flag){
+			count++;
+		}else{
+			break;
+		}
+	}
+	if(count>=5){
+		alert("游戏结束");
+		return;
+	}
+}
 
 
 
