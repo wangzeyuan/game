@@ -214,5 +214,14 @@ body,html{
 	color: green;
 }
 .yellow{
-	color: yellow;
+	color: indianred;
+}
+
+.game{
+	position: absolute;
+	left:0px;
+	top:0px;
+}
+.game canvas{
+	background-color: burlywood;
 }

@@ -2,8 +2,9 @@ var pen = null;
 var offset = null;
 var flag = 1;
 var data = [];
+var status = "run";//run表示下棋，wait表示等待
 
-function gameInit( id ){
+function gameInit( id,_flag ){
 	var html = '<canvas id = "five" width = "600px" height="600px"></canvas>';
 	if(id){
 		$("#"+id).append(html);
@@ -49,15 +50,37 @@ function gameInit( id ){
 	
 	offset=$("#five").offset();
 	
+	if(_flag == 1){
+		flag = 1;
+		status = "run";
+		showchat({
+			username:"系统提示",
+			msg:"系统分配，先手执白"
+		},true);
+	}else{
+		flag = 2;
+		status = "wait";
+		showchat({
+			username:"系统提示",
+			msg:"系统分配，后手执黑"
+		},true);
+	}
+	
 	$("#five").mousedown(function(event){
+		if(status == "wait"){
+			return;
+		}
 		var x = event.clientX - offset.left;
 		var y = event.clientY - offset.top;
 		
 		var row = Math.floor(y/40);
 		var col = Math.floor(x/40);
 		
-		if(data[row][col] == -1){
-			data[row][col] = flag;
+		if(data[row][col] != -1){
+			return;
+		}
+		
+		data[row][col] = flag;
 			pen.beginPath();
 			if(flag == 1){
 				pen.fillStyle = "white";
@@ -68,10 +91,29 @@ function gameInit( id ){
 			pen.fill();
 			pen.stroke();
 			pen.closePath();
+			
+			socket.emit("game.changedata",{
+				row:row,
+				col:col,
+				flag:flag
+			});
+			status = "wait";
 			gameOver(row,col,flag);
-			flag = flag ==1?2:1;
-		}
 	});
+}
+
+function drawFive(row,col,flag){
+	data[row][col] = flag;
+	pen.beginPath();
+	if(flag == 1){
+		pen.fillStyle = "white";
+	}else{
+		pen.fillStyle = "black";
+	}
+	pen.arc(col * 40 + 20,row * 40 + 20,15,0,2 * Math.PI);
+	pen.fill();
+	pen.stroke();
+	pen.closePath();
 }
 
 function gameOver(row,col,flag){

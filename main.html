@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/game.css"/>
 		<script src="js/player.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/socket.io.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/five.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="main-con">
@@ -40,6 +41,8 @@
 			</div>
 			<input type="text" name="" id="roomname" placeholder="请输入房间号" />
 		    <button id="createroom">进入</button>
+		    
+		    <div class="game" id="game"></div>
 		</div>
 	</body>
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
@@ -77,7 +80,7 @@
 			
 			$("#createroom").click(function(){
 				socket.emit("room.createroom",$("#roomname").val());
-				$("#roomname").val(' ');
+				$("#roomname").val('');
 			});
 			
 			socket.on("room.exists",function(){
@@ -91,6 +94,13 @@
 			});
 			socket.on("room.joinOK",function(room){
 				joinRoom(room,false);
+			});
+			socket.on("game.start",function(flag){
+				gameInit("game",flag);
+			});
+			socket.on("game.changedata",function(data){
+				drawFive(data.row,data.col,data.flag);
+				status = "run";
 			});
 			$("#sendchat").click(function(){
 				var chat = {
@@ -146,11 +156,18 @@
 			}
 			
 			if(iscreate){
-				html += "<button>开始游戏</button>";
+				html += "<button id='gamestart'>开始游戏</button>";
 			}
 			html += "<button>退出游戏</button>";
 			
-			$(".rooms .roombottom").html(html)
+			$(".rooms .roombottom").html(html);
+			
+			$("#gamestart").click(function(){
+				socket.emit("game.start");
+			});
+			$("#leaveroom").click(function(){
+				
+			});
 		}
 		
 		function showchat( chat,isme ){
