@@ -61,13 +61,12 @@ function gameInit( id ){
 			pen.beginPath();
 			if(flag == 1){
 				pen.fillStyle = "white";
-				
 			}else{
 				pen.fillStyle = "black";
-				
 			}
 			pen.arc(col * 40 + 20,row * 40 + 20,15,0,2 * Math.PI);
 			pen.fill();
+			pen.stroke();
 			pen.closePath();
 			gameOver(row,col,flag);
 			flag = flag ==1?2:1;
