@@ -61,8 +61,10 @@ function gameInit( id ){
 			pen.beginPath();
 			if(flag == 1){
 				pen.fillStyle = "white";
+				
 			}else{
 				pen.fillStyle = "black";
+				
 			}
 			pen.arc(col * 40 + 20,row * 40 + 20,15,0,2 * Math.PI);
 			pen.fill();
@@ -84,7 +86,7 @@ function gameOver(row,col,flag){
 			break;
 		}
 	}
-	for(var i=row + 1;i<=15;i++){
+	for(var i=row + 1;i<15;i++){
 		if(data[i][col]==flag){
 			count++;
 		}else{
@@ -105,7 +107,7 @@ function gameOver(row,col,flag){
 			break;
 		}
 	}
-	for(var i=col + 1;i<=15;i++){
+	for(var i=col + 1;i<15;i++){
 		if(data[row][i]==flag){
 			count++;
 		}else{
@@ -119,14 +121,14 @@ function gameOver(row,col,flag){
 	
 	//左上右下
 	count = 1;
-	for(var i= row-1,j=col-1;i>=0,j>=0;i--,j--){
+	for(var i= row-1,j=col-1;i>=0&&j>=0;i--,j--){
 		if(data[i][j]==flag){
 			count++;
 		}else{
 			break;
 		}
 	}
-	for(var i=row+1,j=col+1;i<15,j<15;i++,j++){
+	for(var i=row+1,j=col+1;i<15&&j<15;i++,j++){
 		if(data[i][j]==flag){
 			count++;
 		}else{
@@ -140,14 +142,14 @@ function gameOver(row,col,flag){
 	
 	//右上左下
 	count = 1;
-	for(var i= row-1,j=col+1;i>=0,j<15;i--,j++){
+	for(var i= row-1,j=col+1;i>=0&&j<15;i--,j++){
 		if(data[i][j]==flag){
 			count++;
 		}else{
 			break;
 		}
 	}
-	for(var i=row+1,j=col-1;i<15,j>=0;i++,j--){
+	for(var i=row+1,j=col-1;i<15&&j>=0;i++,j--){
 		if(data[i][j]==flag){
 			count++;
 		}else{
