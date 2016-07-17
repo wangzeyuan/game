@@ -75,7 +75,7 @@ function gameInit( id ){
 }
 
 function gameOver(row,col,flag){
-	//上下找
+	//上下
 	var count = 1;
 	for(var i= row-1;i>=0;i--){
 		if(data[i][col]==flag){
@@ -96,7 +96,7 @@ function gameOver(row,col,flag){
 		return;
 	}
 	
-	//左右找
+	//左右
 	count = 1;
 	for(var i= col-1;i>=0;i--){
 		if(data[row][i]==flag){
