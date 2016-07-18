@@ -61,6 +61,7 @@
 			
 			socket.open();
 			socket.on('connect',function(){
+					user = JSON.parse(localStorage.getItem("user"));
 				    user.id = socket.id;
 				    user.line = 1;
 					socket.emit("user.online",user);
@@ -102,6 +103,13 @@
 				drawFive(data.row,data.col,data.flag);
 				status = "run";
 			});
+			socket.on("game.over",function(user){
+				$("#game").html("");
+				initUser(user);
+				data = [];
+				//保存用户记录
+				localStorage.setItem("user",JSON.stringify(user));
+			});
 			$("#sendchat").click(function(){
 				var chat = {
 					username:user.username,
@@ -117,7 +125,7 @@
 		
 		function initUser( user ){
 			$(".userinfo h1").html(user.username).next().html("ID:" + user.id)
-			                 .next().html("胜场：" + user.win +"胜率：" + (user.total ? user.win/user.total : 0) + "%");
+			                 .next().html("胜场：" + user.win +"胜率：" + (user.total ? (user.win/user.total )*100 : 0 ) + "%");
 		}
 		
 		function initOnline( users ){

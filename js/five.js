@@ -98,7 +98,9 @@ function gameInit( id,_flag ){
 				flag:flag
 			});
 			status = "wait";
-			gameOver(row,col,flag);
+			if(gameOver(row,col,flag)){
+				socket.emit("game.over");
+			}
 	});
 }
 
@@ -134,8 +136,7 @@ function gameOver(row,col,flag){
 		}
 	}
 	if(count>=5){
-		alert("游戏结束");
-		return;
+		return true;
 	}
 	
 	//左右
@@ -155,8 +156,7 @@ function gameOver(row,col,flag){
 		}
 	}
 	if(count>=5){
-		alert("游戏结束");
-		return;
+		return true;
 	}
 	
 	//左上右下
@@ -176,8 +176,7 @@ function gameOver(row,col,flag){
 		}
 	}
 	if(count>=5){
-		alert("游戏结束");
-		return;
+		return true;
 	}
 	
 	//右上左下
@@ -197,9 +196,10 @@ function gameOver(row,col,flag){
 		}
 	}
 	if(count>=5){
-		alert("游戏结束");
-		return;
+		return true;
 	}
+	
+	return false;
 }
 
 
