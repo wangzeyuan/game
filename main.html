@@ -166,7 +166,7 @@
 			if(iscreate){
 				html += "<button id='gamestart'>开始游戏</button>";
 			}
-			html += "<button>退出游戏</button>";
+			html += "<button id='leaveroom'>退出游戏</button>";
 			
 			$(".rooms .roombottom").html(html);
 			
@@ -174,7 +174,7 @@
 				socket.emit("game.start");
 			});
 			$("#leaveroom").click(function(){
-				
+				socket.emit("room.leave");
 			});
 		}
 		
